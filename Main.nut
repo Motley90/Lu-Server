@@ -60,7 +60,9 @@ function onScriptUnload() {
 
 function onPlayerJoin(player) {
   ActivePlayer.push( player.ID );
+	
   local ClearRows = 72, i = 0;
+	
   while ( i != ClearRows) {
     MessagePlayer("", player);
     i++;
@@ -96,59 +98,65 @@ function onPlayerDeath( player, reason ) {
 	 
      return 1;
 }
-function onPlayerPart( player, reason )
-{
-     ActivePlayer.remove( player.ID );
-     Deaths[player.ID] = 0;
-	   Kills[player.ID] = 0;
-	   TimesKilled[player.ID] = 0;
-     HealthCap[player.ID] = 25;
-     return 1;
+function onPlayerPart( player, reason ) {
+  ActivePlayer.remove( player.ID );
+  Deaths[player.ID] = 0;  
+  Kills[player.ID] = 0;
+  TimesKilled[player.ID] = 0;
+  HealthCap[player.ID] = 25;
+  return 1;
 }
+
 function onPlayerCommand( player, cmd, text ) {
   if ( cmd == "stats" ) {
     Message( player.Name + " Deaths: " + Deaths[player.ID] + ", Times Killed: " + TimesKilled[player.ID] + ", Kills: " + Kills[player.ID] + "." );
+    return true;  
   }
   
   if (cmd == "die") {
     player.Health = 0;
+    return true;
   }
 	
   if (cmd == "spawncar" ) {
     if (!IsNum(text)) {
       MessagePlayer("/spawncar number", player);
-	   	return false;
-		}
-		local SpawnCar = CreateVehicle( text.tointeger(), player.Pos, player.Angle, -1, -1 );
-		SpawnCar.OneTime = true;
-	 }
-   
-	 if (cmd == "pos") {
-	   print( "[ " + player.Pos.x + ", " + player.Pos.y + ", " + player.Pos.z + " );" );
-	 }
+      return true;
+    }
+    local SpawnCar = CreateVehicle( text.tointeger(), player.Pos, player.Angle, -1, -1 );
+    SpawnCar.OneTime = true;
+    return true;
+  }
+  
+  if (cmd == "pos") {
+    print( "[ " + player.Pos.x + ", " + player.Pos.y + ", " + player.Pos.z + " );" );
+    return true;
+  }
 	 
-	 if (cmd == "race") {
-	 
-	 if (player.Vehicle) {
-	 local UserVehicle = FindVehicle(player.Vehicle.ID)
-	 player.RemoveFromVehicle();
-	 UserVehicle.Remove();
-	 }
-	 if (!text) {
-	   MessagePlayer("/race TheBanshee", player) 
-	   return true;
-	 }
-	 if (text == "The Banshee" ) {
-     RaceEnd( player )
-	   ServerRace = TheBanshee
-     RaceCounter(ServerRace, player)
-     StartRace(player);		   
-	   }
-	 }
-	 if (cmd == "angle" ) print(player.Angle)
-     return 1;
+  if (cmd == "race") {
+    if (player.Vehicle) {
+      local UserVehicle = FindVehicle(player.Vehicle.ID)
+      player.RemoveFromVehicle();
+      UserVehicle.Remove();
+    }
+    if (!text) {
+      MessagePlayer("/race TheBanshee", player) 
+      return true;
+    }
+    if (text == "The Banshee" ) {
+      RaceEnd( player )
+      ServerRace = TheBanshee
+      RaceCounter(ServerRace, player)
+      StartRace(player);		   
+    }
+    return true;
+  }
+  if (cmd == "angle" ) {
+    print(player.Angle)
+    return true;
+  }
 }
-
+// return here to fix broken syntax
 function onPlayerKill( killer, player, reason, bodypart )
 {
   Message( ">> " + killer.Name + " killed " + player.Name );
