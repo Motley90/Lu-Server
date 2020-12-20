@@ -5,6 +5,10 @@ remove all server side pickups and vehicles!
 This is a outdated backup of Darbytown. It's the only copy that could be recovered.
 
 Use at risk
+
+please remove java bassed arrays array(GetmaxPlayers(), val)
+
+player ID starts at 0 so we can't use tables as is for the player.  
 */
 
 local white = Colour(255, 255, 255)
