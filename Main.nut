@@ -24,6 +24,9 @@ CreateObject( 1344, Vector( x, y, z ) );
 these are explosive type anyway. I'm going to make the area really tight. If I can detect there distance of hitting it I will use create explosion at the sight of impact.
 Every freaking barrel could explode. I can't find the cone ID so I will use this for now
 
+display extra spheres and blips as a hint on where to go. Should be able to get MaxSpheres to see if we are running out of vectors to use.
+No reason to make squirrel check it the right way when we have the resources..
+
 */
 
 local white = Colour(255, 255, 255)
@@ -159,7 +162,7 @@ function onPlayerCommand( player, cmd, text ) {
       UserVehicle.Remove();
     }
     if (!text) {
-      MessagePlayer("/race TheBanshee", player) 
+      MessagePlayer("/race The Banshee", player) 
       return true;
     }
     if (text == "The Banshee" ) {
