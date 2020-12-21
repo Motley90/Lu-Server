@@ -9,6 +9,21 @@ Use at risk
 please remove java bassed arrays array(GetmaxPlayers(), val)
 
 player ID starts at 0 so we can't use tables as is for the player.  
+
+Update Vector system. It was a fast version I made. The sphere just hits every freaking index. And you have to understand that the first vector is the spawnpos
+as will the starting sphere. I never made it jump at the time. But mostly set vehicle positions. I just assumed as I tested. 
+
+The race functions are odd. I set them to auto work with each other. If that stays the same it needs to be updated and left as a tool. 
+
+Attempt to add eight spawn positions
+
+
+Add race type. Single player. Go to random positions. Add barrel races to piss off the players
+CreateObject( 1344, Vector( x, y, z ) );
+
+these are explosive type anyway. I'm going to make the area really tight. If I can detect there distance of hitting it I will use create explosion at the sight of impact.
+Every freaking barrel could explode. I can't find the cone ID so I will use this for now
+
 */
 
 local white = Colour(255, 255, 255)
