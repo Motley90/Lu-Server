@@ -6,33 +6,21 @@ Use loadscript http://www.squirrel-lang.org/squirreldoc/stdlib/stdiolib.html?hig
 
 */ 
 
+print("Server Loader has been loaded!");
 
-
-
-local server = {
-    Name = "DarbyTown",
-    Runtime = function() {
-        
-    }
-}
-
-local ServerData = [];  
-Server <- class() { 
+class Server { 
   RaceScript = false;
   ScriptsLoaded = [];
-	    
-  Memory = nil;
-  function LoadScript(strName) 
-  {
-    Memory.apply(function() 
-    {
-      foreach(index, script in ScriptsLoaded) {
-      loadfile(ServerRace[i]);
-    });
+  BaseMode = false;
+  Memory = null;
+  function LoadScript(strName) {
+    loadfile(ScriptsLoaded[i]);
   }
-};
+ };
+print(Server().RaceScript)
+//ActivePlayer.push( player.ID );
 
-//GoToSpherePlayerArray.insert(player.ID, GoToSpherePlayer)
+//ServerData.insert(player.ID, GoToSpherePlayer)
 
 function onScriptLoad() {
 
@@ -52,9 +40,18 @@ function onScriptUnload() {
 
 function onPlayerJoin(player) {
   //ActivePlayer.push( player.ID );
-  MessagePlayer("***DARBYTOWN SCRIPT***", player);
+  if (RaceScript) {
+    //RaceWelcome(player);
+    MessagePlayer("Race Event is [active]", player);
+  }
+  if (BaseMode) { 
+    //BaseWelcome(player);
+    MessagePlayer("Save the base Event is [active]", player);	
+  }
+	
   SmallMessage( "~r~Demo Mode", 999999999, 1 ); // Updates for everyone playing
-  MessagePlayer("To see in game stats type /stats", player);
+  
+	MessagePlayer("To see in game stats type /stats", player);
   MessagePlayer("Need a car guy? Type /spawncar number", player);
   MessagePlayer("If you wish to die at this point feel free to type /die", player);
 
